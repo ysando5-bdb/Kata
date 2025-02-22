@@ -1,0 +1,22 @@
+{
+  "name": "kata",
+  "version": "1.0.0",
+  "description": "Kata Beginner - Challenge 1 | T asks Manager - YSANDO5",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JsonSandoval/kata.git"
+  },
+  "author": "YSANDO5",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JsonSandoval/kata/issues"
+  },
+  "homepage": "https://github.com/JsonSandoval/kata#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
