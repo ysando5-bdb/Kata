@@ -25,6 +25,15 @@ const TaskController = {
     }
   },
 
+  async deleteTask (taskID) {
+    try {
+      const deleteTask = await Task.deleteTask(taskID);
+      return { deleteTask, status: 200 };
+    } catch (error) {
+      console.log('Error en TaskController :: deleteTask :: ', error);
+      return { error: 'Error al eliminar la tarea', status: 500 };
+    }
+  },
 };
 
 module.exports = TaskController;

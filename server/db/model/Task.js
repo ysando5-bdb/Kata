@@ -1,10 +1,8 @@
-// Cargar el archivo JSON usando require()
 const Tasks = require('../Tasks.json');
 const fs = require('fs');  // Necesitamos el módulo fs para manipular archivos
 
 Tasks.getTask = async (taskID) => { //Consulta ID tarea
 
-    console.log("taskID ::::   ", taskID);  // Mostrar el taskID recibido
     let taskFound = null;
 
     // Buscar la tarea usando forEach
@@ -36,19 +34,46 @@ Tasks.addTask = async (newTask) => {
         }
 
         Tasks.push(newTask);
-        const content = JSON.stringify(Tasks)
+        const content = JSON.stringify(Tasks, null, 2);
 
-        //console.log("content :: ", content)
         fs.writeFile('../Tasks.json', content, 'utf8', function (err) {
             if (err) {
                 return console.log(err);
             }
-            return Tasks ;
-        }); 
+            console.log("Tarea agregada exitosamente.");
+        });
     } catch (error) {
         console.error("Error al agregar la tarea:", error);
     }
 };
 
+Tasks.deleteTask = async (taskID) => {
+    try {
+        // Buscar la tarea por taskID
+        const taskIndex = Tasks.findIndex(task => task.taskID === taskID);
+        
+        if (taskIndex === -1) {
+            console.log("Tarea no encontrada para eliminar");
+            return { error: "Tarea no encontrada" };
+        }
+
+        // Eliminar la tarea
+        const deletedTask = Tasks.splice(taskIndex, 1)[0]; // Elimina y obtiene el elemento
+
+        // Guardar el archivo actualizado
+        const content = JSON.stringify(Tasks, null, 2);
+        fs.writeFile('../Tasks.json', content, 'utf8', function (err) {
+            if (err) {
+                return console.log("Error al guardar el archivo:", err);
+            }
+            console.log("Tarea eliminada con éxito:", deletedTask);
+        });
+
+        return { success: "Tarea eliminada con éxito", task: deletedTask };
+    } catch (error) {
+        console.error("Error al eliminar la tarea:", error);
+        return { error: "Error al eliminar la tarea" };
+    }
+};
 
 module.exports = Tasks;
