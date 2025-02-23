@@ -8,9 +8,7 @@ const express = require('express');
 //Imports de API
 const UserAPI = require('./api-routes/UserAPI')
 const TaksAPI = require('./api-routes/TaskAPI')
-//const ReportAPI = require('./api-routes/ReportAPI')
-//Tejido Verde
-//const RecyclerAPI = require('./api-routes/RecyclerAPI')
+
 
 
 
@@ -27,9 +25,6 @@ const router = express.Router();
 // API
 router.use(UserAPI);
 router.use(TaksAPI);
-//router.use(ReportAPI);
-//Tejido Verde
-//router.use(RecyclerAPI);
 
 //Views
 router.use(LoginRouter);
