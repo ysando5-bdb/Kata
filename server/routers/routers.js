@@ -7,7 +7,7 @@ const express = require('express');
 
 //Imports de API
 const UserAPI = require('./api-routes/UserAPI')
-//const ReceptorAPI = require('./api-routes/ReceptorAPI')
+const TaksAPI = require('./api-routes/TaskAPI')
 //const ReportAPI = require('./api-routes/ReportAPI')
 //Tejido Verde
 //const RecyclerAPI = require('./api-routes/RecyclerAPI')
@@ -26,7 +26,7 @@ const router = express.Router();
 
 // API
 router.use(UserAPI);
-//router.use(ReceptorAPI);
+router.use(TaksAPI);
 //router.use(ReportAPI);
 //Tejido Verde
 //router.use(RecyclerAPI);
@@ -34,9 +34,9 @@ router.use(UserAPI);
 //Views
 router.use(LoginRouter);
 router.use(HomeRouter);
-router.get('/login', renderLogin)
-function renderLogin(req, res) {
-  res.render('login');
+router.get('/', renderHome)
+function renderHome(req, res) {
+  res.render('home');
 }
  
 

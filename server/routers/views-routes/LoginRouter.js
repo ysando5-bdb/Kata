@@ -13,9 +13,9 @@ async function validateUser(req, res) {
       }
       //res.cookie('Authorization', 'Bearer '+ response.token);
       if(response.user != null){
-        res.redirect(301, 'home');
+        res.redirect(301, '../home');
       }
-      res.status(301).redirect('login', { layout: null, error: 'Usuario no encontrado'})
+      //res.status(301).redirect('login', { layout: null, error: 'Usuario no encontrado'})
     } catch (err) {
   res.status(400).render('/', { layout: null, error: 'Usuario no encontrado'})
     }

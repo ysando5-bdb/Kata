@@ -10,6 +10,8 @@ const router = require('./routers/routers');
 
 const app = express();
 
+
+
 // Configuración de recursos publicos
 app.use(express.static('public')); 
 
