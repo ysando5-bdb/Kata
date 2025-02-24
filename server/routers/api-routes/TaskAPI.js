@@ -32,7 +32,7 @@ async function addTask(req, res) {
 
 async function deleteTask(req, res) {
   try {
-    const { taskID } = req.body;
+    const { taskID } = req.params; // Usa req.params para obtener el parámetro de la URL      
     const response = await TaskController.deleteTask(taskID);
     if (response.error) {
       return res.status(500).send(response);
@@ -61,7 +61,7 @@ async function updateTask(req, res) {
 }
 
 router.put('/api/update-task', updateTask)
-router.delete('/api/delete-task', deleteTask)
+router.delete('/api/delete-task/', deleteTask)
 router.post('/api/add-task' , addTask);
-router.post('/api/tasks' , getTask);
+router.post('/api/tasks' , getTask);  
 module.exports = router;

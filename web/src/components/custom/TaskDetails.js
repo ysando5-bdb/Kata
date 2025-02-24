@@ -14,6 +14,7 @@ import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Stack from '@mui/material/Stack';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function TaskDetails(props) {
   const [open, setOpen] = React.useState(false);  // Agrega el estado para controlar el Dialog
@@ -24,15 +25,20 @@ function TaskDetails(props) {
   const deleteTask = async () => {
     try {
       console.log('deleteTask: ', { taskID });
-      const response = await axios.delete('/api/delete-task', { data: { taskID } });
+      const response = await axios.delete(`/api/delete-task/?taskID=${taskID}`);
       console.log('response: ', response);
     } catch (err) {
       console.log(err);
     }
   };
+  
 
   // Petición PUT al servidor
-  const updateTaskApi = async () => {
+  const updateTaskApi = async () => { // Valida si los campos están vacíos
+    if (!nameTask || !description) {
+      alert('Por favor, completa todos los campos requeridos.');
+      return; 
+    }
     try {
       console.log('updateTask: ', { taskID, nameTask, description });
       const response = await axios.put('/api/update-task', { taskID, nameTask, description });
@@ -82,24 +88,23 @@ function TaskDetails(props) {
             <DialogTitle>Actualizar</DialogTitle>
             <DialogContent>
               <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                {/* Ocultar el campo taskID si no debe ser editable */}
-                <FormControl sx={{ m: 1, minWidth: 120 }} hidden>
+              <FormControl sx={{ m: 1, minWidth: 120 }}>
                   <InputLabel htmlFor="taskID"></InputLabel>
-                  <TextField id="taskID" label="Id Tarea" variant="standard" name="taskID" value={taskID} onChange={updateState} />
+                  <TextField id="taskID" label="ID Tarea" variant="standard" name="taskID" value={taskID} onChange={updateState} disabled />
                 </FormControl>
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
                   <InputLabel htmlFor="nameTask"></InputLabel>
-                  <TextField id="nameTask" label="Nombre Tarea" variant="standard" name="nameTask" value={nameTask} onChange={updateState} />
+                  <TextField required id="nameTask" label="Nombre Tarea" variant="standard" name="nameTask" value={nameTask} onChange={updateState} />
                 </FormControl>
                 <FormControl sx={{ m: 1, minWidth: 420 }}>
                   <InputLabel htmlFor="description"></InputLabel>
-                  <TextField id="description" label="Descripción" variant="filled" name="description" value={description} onChange={updateState} />
+                  <TextField required  id="description" label="Descripción" variant="filled" name="description" value={description} onChange={updateState} />
                 </FormControl>
               </Box>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose}>Cancelar</Button>
-              <Button onClick={updateTaskApi}>Actualizar</Button>
+              <Button onClick={updateTaskApi} disabled={!nameTask || !description} >Actualizar</Button>
             </DialogActions>
           </Dialog>
         </Stack>
@@ -119,8 +124,8 @@ function TaskDetails(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button onClick={handleClickOpen} size="small">Actualizar</Button>
-          <Button onClick={deleteTask} size="small">Eliminar</Button>
+          <Button onClick={handleClickOpen} variant="outlined" size="small">Actualizar</Button>
+          <Button onClick={deleteTask}variant="outlined" color="error" startIcon={<DeleteIcon />} size="small">Eliminar</Button>
         </CardActions>
       </Card>
       {updateTask()} {/* Llamar la función que contiene el formulario */}

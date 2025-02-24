@@ -1,12 +1,7 @@
 [
   {
-    "taskID": "2",
-    "nameTask": "Desarrollo bton AddTask",
-    "description": "Desarrollar btn al Home para agregar tarea a la BD"
-  },
-  {
     "taskID": "3",
-    "nameTask": "Desarrollo Api Update Task",
-    "description": "actualizar la data en el archivo "
+    "nameTask": "Refinamiento",
+    "description": "Asistir al refinamiento"
   }
 ]

@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
+
 function TaskView() {
   const baseURL = "http://localhost:3000/api/tasks";  // URL de la API
   const [tasks, setTasks] = useState([]);  // Estado para almacenar las tareas
@@ -27,7 +28,7 @@ function TaskView() {
 
 
   const renderTasks = () => {
-    if (tasks.lenght === 0) {
+    if (tasks.length === 0) {
       return (
         <div>Sin tareas para mostrar</div>
       );
@@ -42,7 +43,7 @@ function TaskView() {
     })
   };
 
-  
+
 
   return (
     <div>
@@ -51,14 +52,15 @@ function TaskView() {
           <Typography variant="h6" color="inherit" noWrap>
             Gestor de Tareas | Kata Beginner - Challenge 1 | YSANDO5
           </Typography>
-          <Stack spacing={2} direction="row">
-            <FomrAddTask />
-          </Stack>
         </Toolbar>
       </AppBar>
-      <Box>
+
+      <Box sx={{ marginTop: '64px', display: 'flex', flexWrap: 'wrap', gap: 2 }}>
         {renderTasks()}
       </Box>
+      <Stack  sx={{ marginTop: '64px', display: 'flex', flexWrap: 'wrap', gap: 2 }} >
+            <FomrAddTask />
+          </Stack>
     </div>
   );
 }
