@@ -25,7 +25,7 @@ const TaskController = {
     }
   },
 
-  async deleteTask (taskID) {
+  async deleteTask (taskID) {//función para eliminar tareas
     try {
       const deleteTask = await Task.deleteTask(taskID);
       return { deleteTask, status: 200 };
@@ -34,6 +34,18 @@ const TaskController = {
       return { error: 'Error al eliminar la tarea', status: 500 };
     }
   },
+  async updateTask(taskID, nameTask, description) {
+    //Le pasa al usuario los campos del esquema
+    const taskChange = ({taskID, nameTask, description})
+    console.log("taskChange :: ",taskChange)
+    try {
+      const task = await Task.updateTask(taskChange)
+      return { task, message: 'Tarea Actualizada exitosamente', status: 200 };
+    } catch (error) {
+      console.log('Error en TaskController :: updateTask :: ', error);
+      return { error: 'Error al actualizar la tarea', status: 500 };
+    }
+  }
 };
 
 module.exports = TaskController;

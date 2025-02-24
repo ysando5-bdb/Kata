@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 
 
-export default function DialogSelect() {
+function DialogSelect() {
   const [open, setOpen] = React.useState(false);
   const [taskID, setNewTaskID] = React.useState('')
   const [nameTask, setNewNameTask] = React.useState('')
@@ -92,3 +92,5 @@ export default function DialogSelect() {
     </div>
   );
 }
+
+export default DialogSelect

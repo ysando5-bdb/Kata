@@ -1,1 +1,12 @@
-[{"taskID": "1","nameTask": "Daily","description": "Asistir al daily para revisa las tareas del sprint"}]
+[
+  {
+    "taskID": "2",
+    "nameTask": "Desarrollo bton AddTask",
+    "description": "Desarrollar btn al Home para agregar tarea a la BD"
+  },
+  {
+    "taskID": "3",
+    "nameTask": "Desarrollo Api Update Task",
+    "description": "actualizar la data en el archivo "
+  }
+]

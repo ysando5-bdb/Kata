@@ -24,7 +24,7 @@ async function addTask(req, res) {
       }
       return res.status(200).send(response);
     } catch (error) {
-      console.log('Error en AddTaskAPI :: addTask ::', error)
+      console.log('Error en TaskAPI :: addTask ::', error)
       return res.status(500).send({ error: 'Error inesperado' })
     }
   
@@ -39,12 +39,28 @@ async function deleteTask(req, res) {
   }  
   return res.status(200).send(response);
   } catch (error) {
-    console.log('Error en DeleteTaskAPI :: deleteTask ::', error)
+    console.log('Error en TaskAPI :: deleteTask ::', error)
     return res.status(500).send({ error: 'Error inesperado' })
   }
  
 }
 
+async function updateTask(req, res) {
+  try {
+    const { taskID, nameTask, description } = req.body;
+    const response = await TaskController.updateTask(taskID, nameTask, description);
+    if (response.error) {
+      return res.status(500).send(response);
+  }  
+  return res.status(200).send(response);
+  } catch (error) {
+    console.log('Error en TaskAPI :: updateTask ::', error)
+    return res.status(500).send({ error: 'Error inesperado' })
+  }
+ 
+}
+
+router.put('/api/update-task', updateTask)
 router.delete('/api/delete-task', deleteTask)
 router.post('/api/add-task' , addTask);
 router.post('/api/tasks' , getTask);
